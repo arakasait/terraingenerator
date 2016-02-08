@@ -1,0 +1,78 @@
+div {
+    border: 0x black dashed;
+}
+
+.cell {
+    border: 1px black solid;
+    width: 60px;
+    height: 60px;
+    float: left;
+    font-size: 45px;
+    font-family: Futura, sans-serif;
+    text-align: center;
+}
+
+.row1 {
+    clear: both;
+}
+
+.row2 {
+    clear: both;
+}
+
+.row3 {
+    clear: both;
+}
+
+.row4 {
+    clear: both;
+}
+
+.row5 {
+    clear: both;
+}
+
+.row6 {
+    clear: both;
+}
+
+.row7 {
+    clear: both;
+}
+
+.row8 {
+    clear: both;
+}
+
+
+.listdisplay {
+    font-family: Arial, sans-serif;
+}
+
+#button {
+    clear: both;
+    font-size: 22px;
+    font-family: Arial Black, sans-serif;
+}
+#report {
+    clear: both;
+}
+
+#listReport{
+    clear: both;
+}
+
+input {
+    height: 50px;
+    width: 744px;
+    background-color: black;
+    color: white;
+}
+
+h1 {
+    font-family: Futura, sans-serif;
+}
+
+h2 {
+    font-family: Futura, sans-serif;
+}
