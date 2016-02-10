@@ -79,7 +79,9 @@ var earthbloodMere = new Terrain("Marsh","Dangerous Terrain for all units, other
 var khemrianQuicksand = new Terrain("Marsh","Dangerous Terrain for all units, other than Skirmishers. Cavalry, monstrous cavalry and chariots that enter marshland fail their Dangerous Terrain tests on a 1 or 2.","Khemrian Quicksand","A monster, monstrous infantry  or monstrous cavalry model that fails its Dangerous Terrain test for Khemrian Quicksand is removed as a casualty with no saves of any kind allowed.","121, Dangerous Terrain: 117", undefined);
 var mistWreathedSwamp = new Terrain("Marsh",'Dangerous Terrain for all units, other than Skirmishers. Cavalry, monstrous cavalry and chariots that enter marshland fail their Dangerous Terrain tests on a 1 or 2.',"Mist-wreathed Swamp","If the majority of a unit's models are wholly within a mist-wreathed swamp, the unit counts as being in hard cover. However, at the end of each Movement phase, the unit must pass an Initiative test or have D6 models dragged to their doom (victims are selected in the same manner as the allocation of shooting hits).","121, Dangerous Terrain: 117, Hard Cover: 74", undefined);
 
+var settlement = new Terrain ("Settlement", "Multiple", "" , "None", "None", undefined)
 
+var encampment = new Terrain ("Encampment", "Multiple", "", "None", "None", undefined)
 
 
 
@@ -114,7 +116,7 @@ function marsh() {
 //Magical Mystery Function
 function magicalMystery() {
     var magicalMysteryRoll = (Math.floor((Math.random() * 6) + 1));
-    console.log(magicalMysteryRoll)
+    console.log(magicalMysteryRoll);
     var result;
     switch (magicalMysteryRoll) {
         case 1:
@@ -144,7 +146,7 @@ function magicalMystery() {
 //Hill Function
 function hill() {
     var hillRoll = (Math.floor((Math.random() * 6) + 1));
-    console.log(hillRoll)
+    console.log(hillRoll);
     var result;
     switch (hillRoll) {
         case 1:
@@ -174,7 +176,7 @@ function hill() {
 //Steadfast Sanctum Function
 function steadfastSanctum() {
     var steadfastSanctumRoll = (Math.floor((Math.random() * 6) + 1));
-    console.log(steadfastSanctumRoll)
+    console.log(steadfastSanctumRoll);
     var result;
     switch (steadfastSanctumRoll) {
         case 1:
@@ -202,8 +204,8 @@ function steadfastSanctum() {
 //Hill Function
 function obstacles() {
     var obstaclesRoll = (Math.floor((Math.random() * 6) + 1));
+    console.log(obstaclesRoll);
     var result;
-    console.log("Obstacles" + " " +obstaclesRoll);
     switch (obstaclesRoll) {
         case 1:
             result = fence;
@@ -230,7 +232,7 @@ function obstacles() {
 //Sinister Structure Function
 function sinisterStructure() {
     var sinisterStructureRoll = (Math.floor((Math.random() * 6) + 1));
-    console.log(sinisterStructureRoll)
+    console.log(sinisterStructureRoll);
     var result;
     switch (sinisterStructureRoll) {
         case 1:
@@ -258,38 +260,38 @@ function sinisterStructure() {
 function settlementOfOrder() {
     var buildingsRoll = (Math.floor((Math.random() * 3) + 1));
     var obstaclesNumber = (Math.floor((Math.random() * 3) + 1));
-    var completeSettlement = "A Settlement of Order composed of " + buildingsRoll + " buildings,";
+    var completeSettlement = "A Settlement of Order composed of " + buildingsRoll + " building(s)";
     var obstaclesTestString = "";
-    for (var e = 0; e <= obstaclesNumber; e++) {
-        obstaclesTestString += obstacles();
+    for (var e = 0; e < obstaclesNumber; e++) {
+        obstaclesTestString += " a " +obstacles().subType +",";
     }
-    completeSettlement = completeSettlement + " " + obstaclesNumber + obstaclesTestString + " obstacles" + ",";
-    completeSettlement = completeSettlement + " and " + steadfastSanctum();
-    completeSettlement.subType = completeSettlement;
+    completeSettlement = completeSettlement + obstaclesTestString;
+    completeSettlement = completeSettlement + " and a " + steadfastSanctum().subType;
+    settlement.subType = completeSettlement;
+    return settlement;
 
-    return completeSettlement;
 
 }
 //Encampment of Destruction Function
 function encampmentofDestruction() {
-    var buildingsRoll = (Math.floor((Math.random() * (3 - 1) + 1)));
-    var obstaclesNumber = (Math.floor((Math.random() * (3 - 1) + 1)));
-    var completeEncampment = "An Encampment of Destruction composed of " + buildingsRoll + " buildings,";
+    var buildingsRoll = (Math.floor((Math.random() * 3) + 1));
+    var obstaclesNumber = (Math.floor((Math.random() * 3) + 1));
+    var completeEncampment = "An Encampment of Destruction composed of " + buildingsRoll + " building(s),";
     var obstaclesTestString = "";
-    for (var o = 0; o <= obstaclesNumber; o++) {
-        obstaclesTestString += obstacles();
+    for (var o = 0; o < obstaclesNumber; o++) {
+        obstaclesTestString += " a " +obstacles().subType +",";
     }
-    completeEncampment = completeEncampment + " a " + obstaclesNumber + obstaclesTestString + " obstacles" + ",";
-    completeEncampment = completeEncampment + " and " + sinisterStructure();
-    completeEncampment.subType = completeEncampment;
-
-    return completeEncampment;
+    completeEncampment = completeEncampment + obstaclesTestString;
+    completeEncampment = completeEncampment + " and a " + sinisterStructure().subType;
+    encampment.subType = completeEncampment;
+    return encampment;
 
 }
 //GENERATING THE RESULTS
 //For each position in the array, roll two dice and sum the result, then run appropriate terrain type functions)
 function selectorFunction() {
     var roll = ((Math.floor((Math.random() * 6) + 1)) + (Math.floor((Math.random() * 6) + 1)));
+    console.log("The 2D6 roll is " +roll);
     var result;
     switch (roll) {
         case 2:
@@ -305,16 +307,16 @@ function selectorFunction() {
             result = hill();
             break;
         case 6:
-            result = "Building";
+            result = building;
             break;
         case 7:
-            result = "Mysterious Forest";
+            result = mysteriousForest;
             break;
         case 8:
             result = obstacles();
             break;
         case 9:
-            result = "Mysterious River";
+            result = mysteriousRiver;
             break;
         case 10:
             result = magicalMystery();
@@ -346,7 +348,7 @@ function insertArray() {
     for (var d = 0; d < finalTerrain.length; d++)
     {
         // create the createTextNode
-        var dPlusOne = ([d+1])
+        var dPlusOne = ([d+1]);
         var insertText = document.createTextNode(theText);
         insertText.innerHtml = finalTerrain[d];
         // document.getElementById([i]).appendChild(insertText);
